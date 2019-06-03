@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.employee_mis.dao.UserInfoDao">
+    <resultMap id="UserInfoDOResultMap" type="com.jt.employee_mis.entity.UserInfoEntity">
+        <id property="id" column="id" />
+        <result property="gmtCreate" column="gmt_create" />
+        <result property="gmtModified" column="gmt_modified" />
+        <result property="username" column="user_name" />
+        <result property="password" column="password" />
+        <result property="description" column="description" />
+        <result property="accountState" column="account_state" />
+        <result property="userType" column="user_type" />
+    </resultMap>
+
+
+
+    <sql id="selectUser">
+        select id, gmt_create, gmt_modified, user_name, password, description, account_state, user_type from user_info
+    </sql>
+
+    <select id="queryUserInfoByUsername" resultMap="UserInfoDOResultMap">
+        <include refid="selectUser" /> WHERE user_name=#{username}
+    </select>
+
+    <select id="queryUserInfoByUserId" resultMap="UserInfoDOResultMap">
+        <include refid="selectUser" /> where id=#{userId}
+    </select>
+
+    <select id="queryAllUserList" resultType="Long">
+        select id from user_info
+    </select>
+
+    <delete id="deleteUserById">
+        delete from user_info where id = #{userId}
+    </delete>
+
+    <insert id="addUserInfo" parameterType="com.sunt.entity.UserInfoDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_info(
+        gmt_create,
+        <if test="username != null and username != ''">user_name,</if>
+        <if test="password != null and password != ''">password,</if>
+        <if test="description != null and description != ''">description,</if>
+        <if test="accountState != null">account_state,</if>
+        <if test="userType != null">user_type,</if>
+        gmt_modified
+        )VALUES (
+        sysdate(),
+        <if test="username != null and username != ''">#{username},</if>
+        <if test="password != null and password != ''">#{password},</if>
+        <if test="description != null and description != ''">#{description},</if>
+        <if test="accountState != null">#{accountState},</if>
+        <if test="userType != null">#{userType},</if>
+        sysdate()
+        )
+    </insert>
+
+    <update id="resetUserPwd">
+        update user_info set password=#{pwd} where id=#{userId}
+    </update>
+
+    <select id="checkUsernameUnique" resultType="Integer">
+        select count(0) from user_info where user_name=#{username}
+    </select>
+
+    <update id="updateUserInfo" parameterType="com.sunt.entity.UserInfoDO">
+        update user_info
+        <set>
+            <if test="username != null and username != ''">user_name=#{username},</if>
+            <if test="password != null and password != ''">password=#{password},</if>
+            <if test="description != null and description != ''">description=#{description},</if>
+            <if test="accountState != null">account_state=#{accountState},</if>
+            <if test="userType != null">user_type=#{userType},</if>
+            gmt_modified = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>
