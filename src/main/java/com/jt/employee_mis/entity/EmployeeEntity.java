@@ -1,5 +1,7 @@
 package com.jt.employee_mis.entity;
 
+import java.util.Date;
+
 /**
  * @Auther: Jiangtian
  * @Date: 2019/6/3 13:49
@@ -8,6 +10,10 @@ package com.jt.employee_mis.entity;
 public class EmployeeEntity {
 
     private Long id;
+
+    private Date gmtCreate;
+
+    private Date gmtModified;
 
     private String name;
 
@@ -45,5 +51,21 @@ public class EmployeeEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

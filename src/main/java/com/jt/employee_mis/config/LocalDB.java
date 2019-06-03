@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 public class LocalDB {
 
     // 精确到 location 目录，以便跟其他数据源隔离
-    static final String PACKAGE = "com.jt.employee_mis.Dao";
+    static final String PACKAGE = "com.jt.employee_mis.dao";
     static final String MAPPER_LOCATION = "classpath:mapper/*.xml";
 
     @Value("${location.datasource.url}")
