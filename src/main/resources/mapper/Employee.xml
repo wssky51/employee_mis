@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+* Created by Jiangtian on 2018-11-08.
+-->
+<mapper namespace="com.jt.employee_mis.dao.EmployeeDao">
+
+    <resultMap id="BaseResultMap" type="com.jt.employee_mis.entity.EmployeeEntity">
+        <result column="ID" property="id"/>
+        <result column="GMT_CREATE" property="gmtCreate"/>
+        <result column="GMT_MODIFIED" property="gmtModified"/>
+        <result column="NAME" property="name"/>
+        <result column="AGE" property="age"/>
+        <result column="GENDER" property="gender"/>
+    </resultMap>
+
+    <sql id="condition">
+        <where>
+            <if test="name != null and name != ''">
+              AND NAME = #{name}
+            </if>
+            <if test="age != null">
+                AND AGE = #{age}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND GENDER = #{gender}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByCondition" resultMap="BaseResultMap">
+      SELECT * FROM employee
+      <include refid="condition" />
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+      SELECT * FROM employee
+    </select>
+
+</mapper>
