@@ -1,7 +1,14 @@
 package com.jt.employee_mis.entity;
 
+import java.util.Date;
+
 public class UserInfoEntity
 {
+    private Long id;
+
+    private Date gmtCreate;
+
+    private Date gmtModified;
     /**
      * 用户名
      */
@@ -71,5 +78,29 @@ public class UserInfoEntity
     public void setAccountState(Integer accountState)
     {
         this.accountState = accountState;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

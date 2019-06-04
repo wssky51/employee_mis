@@ -34,7 +34,7 @@
         delete from user_info where id = #{userId}
     </delete>
 
-    <insert id="addUserInfo" parameterType="com.sunt.entity.UserInfoDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addUserInfo" parameterType="com.jt.employee_mis.entity.UserInfoEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_info(
         gmt_create,
         <if test="username != null and username != ''">user_name,</if>
@@ -62,7 +62,7 @@
         select count(0) from user_info where user_name=#{username}
     </select>
 
-    <update id="updateUserInfo" parameterType="com.sunt.entity.UserInfoDO">
+    <update id="updateUserInfo" parameterType="com.jt.employee_mis.entity.UserInfoEntity">
         update user_info
         <set>
             <if test="username != null and username != ''">user_name=#{username},</if>
